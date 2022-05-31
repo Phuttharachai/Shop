@@ -44,3 +44,27 @@ class PetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
         fields = ['id', 'name', 'birthdate', 'type', 'breed', 'order']
+
+class CustomerSerializer(serializers.ModelSerializer):
+
+    type = serializers.SlugRelatedField(
+        slug_field='name',
+        error_messages={
+            'does_not_exist': 'Pet type does not exist.',
+        },
+        queryset=Customername.objects.all())
+    address = serializers.SlugRelatedField(
+        slug_field='address',
+        error_messages={
+            'does_not_exist': 'Pet type does not exist.',
+        },
+        queryset=Customeraddress.objects.all())
+
+    order = serializers.PrimaryKeyRelatedField(
+        allow_null=True,
+        required=False,
+        queryset=Order.objects.all())
+
+    class Meta:
+        model = Customer
+        fields = ['id', 'name', 'phone', 'address', 'order']
