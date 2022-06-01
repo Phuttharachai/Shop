@@ -39,7 +39,7 @@ class Pet(models.Model):
     order = models.ForeignKey(
                         Order,
                         null=True,
-                        related_name='pets',
+                        related_name='shop',
                         on_delete=models.CASCADE)
 
     def __str__(self):
