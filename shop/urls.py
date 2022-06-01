@@ -13,4 +13,4 @@ class OptionalSlashRouter(DefaultRouter):
 router = OptionalSlashRouter()
 router.register(r'shop', views.PetViewSet)
 router.register(r'orders', views.OrderViewSet)
-router.register(r'customer', views.CustomerSerializerViewSet)
+router.register(r'customer', views.CustomerViewSet)
