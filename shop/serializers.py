@@ -1,4 +1,4 @@
-from pets.models import Pet, PetType, PetBreed, Order , Customer , Customeraddress , Customername
+from shop.models import Pet, PetType, PetBreed, Order , Customer , Customeraddress , Customername
 from rest_framework import serializers, validators
 
 
@@ -60,11 +60,7 @@ class CustomerSerializer(serializers.ModelSerializer):
         },
         queryset=Customeraddress.objects.all())
 
-    order = serializers.PrimaryKeyRelatedField(
-        allow_null=True,
-        required=False,
-        queryset=Order.objects.all())
 
     class Meta:
         model = Customer
-        fields = ['id', 'name', 'phone', 'address', 'order']
+        fields = ['id', 'name', 'phone', 'address']

@@ -1,5 +1,6 @@
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from pets import views
+from shop import views
 
 
 class OptionalSlashRouter(DefaultRouter):
@@ -10,7 +11,12 @@ class OptionalSlashRouter(DefaultRouter):
         self.trailing_slash = '/?'
 
 
-router = OptionalSlashRouter()
-router.register(r'shop', views.PetViewSet)
-router.register(r'orders', views.OrderViewSet)
-router.register(r'customer', views.CustomerSerializerViewSet)
+router = DefaultRouter()
+router.register(r'pets', views.PetViewSet,basename="pets")
+router.register(r'orders', views.OrderViewSet,basename="orders")
+router.register(r'customers', views.CustomerViewSet,basename="customers")
+
+# The API URLs are now determined automatically by the router.
+urlpatterns = [
+    path('', include(router.urls)),
+]

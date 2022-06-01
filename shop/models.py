@@ -49,7 +49,7 @@ class Pet(models.Model):
 
 class Customername(models.Model):
     """
-    Stores the types of pets, i.e: dogs, cats etc.
+
     """
     customername = models.CharField(max_length=100, unique=True)
 
@@ -58,7 +58,7 @@ class Customername(models.Model):
 
 class Customeraddress(models.Model):
     """
-    Stores the types of pets, i.e: dogs, cats etc.
+
     """
     customeraddress = models.CharField(max_length=100, unique=True)
 
@@ -69,12 +69,3 @@ class Customer(models.Model):
     customername = models.CharField(max_length=100)
     phone = models.DateField()
     address = models.CharField(max_length=100)
-
-    order = models.ForeignKey(
-                        Order,
-                        null=True,
-                        related_name='shop',
-                        on_delete=models.CASCADE)
-
-    def __str__(self):
-        return '{0} is a {1}, {2}'.format(self.name)

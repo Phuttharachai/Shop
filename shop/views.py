@@ -1,9 +1,6 @@
-
 from rest_framework import permissions, viewsets, mixins
-from pets.models import Pet, Order ,Customer
-from pets.serializers import PetSerializer, OrderSerializer ,CustomerSerializer
-
-
+from shop.models import Pet, Order ,Customer
+from shop.serializers import PetSerializer, OrderSerializer ,CustomerSerializer
 
 class PetViewSet(viewsets.ModelViewSet):
     """
