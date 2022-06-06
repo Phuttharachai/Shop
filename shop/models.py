@@ -70,4 +70,3 @@ class Customer(models.Model):
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=14)
     address = models.CharField(max_length=100)
-
