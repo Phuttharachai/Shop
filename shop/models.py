@@ -51,7 +51,7 @@ class Customername(models.Model):
     """
 
     """
-    customername = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
@@ -60,12 +60,14 @@ class Customeraddress(models.Model):
     """
 
     """
-    customeraddress = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.address
 
+
 class Customer(models.Model):
-    customername = models.CharField(max_length=100)
-    phone = models.DateField()
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=14)
     address = models.CharField(max_length=100)
+
