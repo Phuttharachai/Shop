@@ -63,7 +63,7 @@ class Customeraddress(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
-        return self.address
+        return self.name
 
 
 class Customer(models.Model):
