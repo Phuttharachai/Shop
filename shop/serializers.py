@@ -7,9 +7,9 @@ class OrderSerializer(serializers.ModelSerializer):
         """
         Raises validation error if any of the pet ids provided was sold before.
         """
-        pets_ids = [pet.id for pet in value]
-        sold_pets = Pet.objects.filter(pk__in=pets_ids, order__isnull=False)
-        if sold_pets:
+        shop_ids = [pet.id for pet in value]
+        sold_shop = Pet.objects.filter(pk__in=shop_ids, order__isnull=False)
+        if sold_shop:
             raise serializers.ValidationError(
                 'one or more of the provided pets were already sold.')
         return value
