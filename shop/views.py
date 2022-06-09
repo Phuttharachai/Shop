@@ -12,7 +12,7 @@ class PetViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
 
 
-class OrderViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+class OrderViewSet(viewsets.ModelViewSet, viewsets.GenericViewSet):
     """
     A ViewSet for creating pets orders API.
     """
@@ -21,7 +21,7 @@ class OrderViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     serializer_class = OrderSerializer
     permission_classes = [permissions.AllowAny]
 
-class CustomerViewSet(viewsets.ModelViewSet):
+class CustomerViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     """
     A ViewSet for creating pets Customer API.
     """

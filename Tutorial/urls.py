@@ -23,3 +23,4 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),  # drf browsable api docs
     path('', include(router.urls))
 ]
+

@@ -3,11 +3,11 @@ from rest_framework import serializers, validators
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    def validate_pets(self, value):
+    def validate_shop(self, value):
         """
         Raises validation error if any of the pet ids provided was sold before.
         """
-        shop_ids = [pet.id for pet in value]
+        shop_ids = [shop.id for shop in value]
         sold_shop = Pet.objects.filter(pk__in=shop_ids, order__isnull=False)
         if sold_shop:
             raise serializers.ValidationError(
