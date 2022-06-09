@@ -1,4 +1,4 @@
-from shop.models import Pet, PetType, PetBreed, Order , Customer , Customeraddress , Customername
+from shop.models import Pet, PetType, PetBreed, Order, Customer
 from rest_framework import serializers, validators
 
 
@@ -45,8 +45,8 @@ class PetSerializer(serializers.ModelSerializer):
         model = Pet
         fields = ['id', 'name', 'birthdate', 'type', 'breed', 'order']
 
-class CustomerSerializer(serializers.ModelSerializer):
 
+class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
         fields = ['id', 'name', 'phone', 'address']
