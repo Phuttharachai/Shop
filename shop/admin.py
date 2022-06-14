@@ -16,5 +16,5 @@ class PetAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(Customer)
-class CumtomerAdmin(admin.ModelAdmin):
+class CustomerAdmin(admin.ModelAdmin):
     pass

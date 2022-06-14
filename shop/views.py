@@ -12,7 +12,7 @@ class PetViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
 
 
-class OrderViewSet(viewsets.ModelViewSet, viewsets.GenericViewSet):
+class OrderViewSet(viewsets.ModelViewSet):
     """
     A ViewSet for creating pets orders API.
     """

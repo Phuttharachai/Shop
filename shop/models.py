@@ -31,7 +31,7 @@ class Order(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     #customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     currency = models.CharField(max_length=50)
-    # TODO : pub_date
+    orderdate = models.DateField()
 
 
 class Pet(models.Model):

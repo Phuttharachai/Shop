@@ -21,7 +21,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'price', 'currency', 'shop']
+        fields = ['id', 'price', 'currency','orderdate','shop']
 
 
 class PetSerializer(serializers.ModelSerializer):
