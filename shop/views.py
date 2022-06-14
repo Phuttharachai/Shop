@@ -1,4 +1,4 @@
-from rest_framework import permissions, viewsets, mixins
+from rest_framework import permissions, viewsets
 from shop.models import Pet, Order ,Customer
 from shop.serializers import PetSerializer, OrderSerializer ,CustomerSerializer
 
@@ -22,7 +22,7 @@ class OrderViewSet(viewsets.ModelViewSet, viewsets.GenericViewSet):
     permission_classes = [permissions.AllowAny]
 
 
-class CustomerViewSet(viewsets.GenericViewSet,mixins.CreateModelMixin):
+class CustomerViewSet(viewsets.ModelViewSet):
 
     """
     A ViewSet for creating pets Customer API.
