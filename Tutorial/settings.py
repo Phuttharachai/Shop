@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-!9*%xbs27^k*4wgae7f8=wf5z3+pz!q&rju!3v%1zi0ov7p2n1
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'shop.apps.ShopConfig',
     'rest_framework_swagger',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -118,3 +119,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+

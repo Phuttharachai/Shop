@@ -8,6 +8,7 @@ class CustomerSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'phone', 'address']
 
 class OrderSerializer(serializers.ModelSerializer):
+
     def validate_shop(self, value):
         """
         Raises validation error if any of the pet ids provided was sold before.

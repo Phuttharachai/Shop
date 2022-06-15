@@ -18,3 +18,7 @@ class PetAdmin(admin.ModelAdmin):
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(Order)
+class Order(admin.ModelAdmin):
+    pass
