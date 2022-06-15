@@ -9,7 +9,7 @@ class PetViewSet(viewsets.ModelViewSet):
 
     queryset = Pet.objects.all()
     serializer_class = PetSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class OrderViewSet(viewsets.ModelViewSet):
@@ -19,7 +19,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class CustomerViewSet(viewsets.ModelViewSet):
@@ -30,4 +30,4 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
