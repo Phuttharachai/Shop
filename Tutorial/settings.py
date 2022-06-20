@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'shop.apps.ShopConfig',
     'rest_framework_swagger',
+
 ]
 
 MIDDLEWARE = [
