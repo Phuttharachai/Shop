@@ -25,9 +25,21 @@
           <div class="download-url-wrapper">
           {% if USE_SESSION_AUTH %}
             {% if request.user.is_authenticated %}
-            <a class="download-url-button button" href="/api-auth/logout/?next=/api/">Log out</>
+            <ul class="nav navbar-nav pull-right">
+                  <li class="dropdown open">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+            admin
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="/api-auth/logout/?next=/api/">Log out</a></li>
+        </ul>
+    </li>
+            </ul>
             {% else %}
-             <a class="download-url-button button" href="/api-auth/login/?next=/api/">Log in</a>
+             <ul class="nav navbar-nav pull-right">
+               <li><a href="/api-auth/login/?next=/api/">Log in</a></li>
+            </ul>
             {% endif %}
           {% endif %}
           </div>
