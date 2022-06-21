@@ -59,9 +59,6 @@ class Pet(models.Model):
     #type = models.ForeignKey(PetType, on_delete=models.CASCADE)
     type = models.ForeignKey(PetType, on_delete=models.SET_NULL, null=True)
     breed = models.ForeignKey(PetBreed, on_delete=models.CASCADE)
-    dad = models.ForeignKey(Dad, on_delete=models.SET_NULL, null=True)
-    mom = models.ForeignKey(Mom, on_delete=models.SET_NULL, null=True)
-    child = models.ForeignKey(Child, on_delete=models.SET_NULL, null=True)
     # when order is deleted, the related pets gets deleted as
     # am not sure what does order deletion mean
     # it could mean refund? in that case we should just set pet's order to null
@@ -69,7 +66,9 @@ class Pet(models.Model):
         Order,
         null=True,
         related_name='shop',
-        on_delete=models.CASCADE)
+        on_delete=models.SET_NULL,
+        blank=True)
+
 
     def __str__(self):
         return '{0} is a {1}, {2}'.format(self.name, \
