@@ -41,7 +41,7 @@ class PetSerializer(serializers.ModelSerializer):
             'does_not_exist': 'Pet breed does not exist.',
         },
         queryset=PetBreed.objects.all())
-
+    """"
     dad = serializers.SlugRelatedField(
         slug_field='name',
         error_messages={
@@ -62,7 +62,7 @@ class PetSerializer(serializers.ModelSerializer):
             'does_not_exist': 'Pet Child does not exist.',
         },
         queryset=Child.objects.all())
-
+    """
     order = serializers.PrimaryKeyRelatedField(
         allow_null=True,
         required=False,
