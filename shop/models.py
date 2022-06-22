@@ -15,21 +15,21 @@ class PetBreed(models.Model):
     """
     Stores the pets breeds, i.e: persian cat, german shepherd
     """
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
 
 class Dad(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
 
 class Mom(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100,)
 
     def __str__(self):
         return self.name
@@ -62,12 +62,10 @@ class Pet(models.Model):
     # when order is deleted, the related pets gets deleted as
     # am not sure what does order deletion mean
     # it could mean refund? in that case we should just set pet's order to null
-    order = models.ForeignKey(
-        Order,
-        null=True,
-        related_name='shop',
-        on_delete=models.SET_NULL,
-        blank=True)
+    order = models.ForeignKey(Order,null=True,related_name='shop', on_delete=models.SET_NULL,blank=True)
+    #dad = models.ForeignKey(Dad,related_name='shop', on_delete=models.SET_NULL, null=True, blank=True)
+    #mom = models.ForeignKey(Mom, related_name='shop', on_delete=models.SET_NULL, null=True, blank=True)
+    #child = models.ForeignKey(Child, related_name='shop', on_delete=models.SET_NULL, null=True, blank=True)
 
 
     def __str__(self):
