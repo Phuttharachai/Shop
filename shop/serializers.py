@@ -1,7 +1,5 @@
-from shop.models import Pet, PetType, PetBreed, Order, Customer,Dad,Mom,Child
+from shop.models import Pet, PetType, PetBreed, Order, Customer,Parent
 from rest_framework import serializers, validators
-
-#from dad.serializers import DadSerializer
 
 
 class CustomerSerializer(serializers.ModelSerializer):
@@ -22,57 +20,19 @@ class OrderSerializer(serializers.ModelSerializer):
                 'one or more of the provided pets were already sold.')
         return value
 
+    customer = serializers.SlugRelatedField(
+        allow_null=True,
+        slug_field='name',
+        required=False,
+        queryset=Customer.objects.all())
+
     class Meta:
         model = Order
-        fields = ['id', 'price', 'currency','orderdate','shop']
+        fields = ['id','customer', 'price', 'currency','orderdate','shop']
 
-""""
+
 class PetSerializer(serializers.ModelSerializer):
     # to send pet type name instead of id in the requests
-    type = serializers.SlugRelatedField(
-        slug_field='name',
-        error_messages={
-            'does_not_exist': 'Pet type does not exist.',
-        },
-        queryset=PetType.objects.all())
-
-    # to send pet breed name instead of id in the requests
-    breed = serializers.SlugRelatedField(
-        slug_field='name',
-        error_messages={
-            'does_not_exist': 'Pet breed does not exist.',
-        },
-        queryset=PetBreed.objects.all())
-
-    order = serializers.PrimaryKeyRelatedField(
-        allow_null=True,
-        required=False,
-        queryset=Order.objects.all())
-
-    dad = serializers.SlugRelatedField(
-        allow_null=True,
-        slug_field='name',
-        required=False,
-        queryset=Dad.objects.all())
-
-    mom = serializers.SlugRelatedField(
-        allow_null=True,
-        slug_field='name',
-        required=False,
-        queryset=Mom.objects.all())
-
-    child = serializers.SlugRelatedField(
-        allow_null=True,
-        slug_field='name',
-        required=False,
-        queryset=Child.objects.all())
-
-    class Meta:
-        model = Pet
-        fields = ['id', 'name', 'birthdate', 'type', 'breed','dad','mom','child', 'order']
-"""
-
-class PetSerializer(serializers.ModelSerializer):
 
     type = serializers.SlugRelatedField(
         slug_field='name',
@@ -94,37 +54,29 @@ class PetSerializer(serializers.ModelSerializer):
         required=False,
         queryset=Order.objects.all())
 
+    parent = serializers.SlugRelatedField(
+        allow_null=True,
+        slug_field='name',
+        required=False,
+        queryset=Parent.objects.all())
+
+    # customer = serializers.PrimaryKeyRelatedField(
+    #     allow_null=True,
+    #     required=False,
+    #     queryset=Customer.objects.all())
+
+    son = serializers.SerializerMethodField()
 
     class Meta:
         model = Pet
-        fields = (
-            'id',
-            'name',
-            'birthdate',
-            'type',
-            'breed',
-            'order'
-        )
+        fields = ['id', 'name', 'birthdate', 'type', 'breed','parent', 'order','son']
 
-class PetDadserializer(serializers.ModelSerializer):
-
-    dad = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Pet
-        fields = (
-            'id',
-            'name',
-            'birthdate',
-            'type',
-            'breed',
-            'order',
-            'dad'
-        )
-
-    def get_dad(self, shop):
-        dad = Dad.objects.get(pet_id=shop.id)
-        dad_serializer = DadSerializer(dad)
-        return dad_serializer.data
+    def get_son(self, pet):
+        try:
+            son = Pet.objects.get(parent_id=pet.id)
+        except Pet.DoesNotExist:
+            return 'pet not found'
+        son_serializer = PetSerializer(son)
+        return son_serializer.data
 
 

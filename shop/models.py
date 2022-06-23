@@ -21,18 +21,12 @@ class PetBreed(models.Model):
         return self.name
 
 
-class Dad(models.Model):
+class Parent(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
-
-class Mom(models.Model):
-    name = models.CharField(max_length=100,)
-
-    def __str__(self):
-        return self.name
 
 class Child(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -48,7 +42,7 @@ class Customer(models.Model):
 
 class Order(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    #customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     currency = models.CharField(max_length=50)
     orderdate = models.DateField()
 
@@ -56,16 +50,16 @@ class Order(models.Model):
 class Pet(models.Model):
     name = models.CharField(max_length=100)
     birthdate = models.DateField()
-    #type = models.ForeignKey(PetType, on_delete=models.CASCADE)
     type = models.ForeignKey(PetType, on_delete=models.SET_NULL, null=True)
     breed = models.ForeignKey(PetBreed, on_delete=models.CASCADE)
+    """"
     # when order is deleted, the related pets gets deleted as
     # am not sure what does order deletion mean
     # it could mean refund? in that case we should just set pet's order to null
+    """
     order = models.ForeignKey(Order,null=True,related_name='shop', on_delete=models.SET_NULL,blank=True)
-    #dad = models.ForeignKey(Dad,related_name='shop', on_delete=models.SET_NULL, null=True, blank=True)
-    #mom = models.ForeignKey(Mom, related_name='shop', on_delete=models.SET_NULL, null=True, blank=True)
-    #child = models.ForeignKey(Child, related_name='shop', on_delete=models.SET_NULL, null=True, blank=True)
+    parent = models.ForeignKey(Parent, on_delete=models.SET_NULL, null=True, blank=True)
+   # customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
 
 
     def __str__(self):
