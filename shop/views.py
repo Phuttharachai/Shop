@@ -3,6 +3,11 @@ from shop.models import Pet, Order ,Customer
 from shop.serializers import PetSerializer, OrderSerializer ,CustomerSerializer
 from rest_framework.response import Response
 
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+
+
 class PetViewSet(viewsets.GenericViewSet,mixins.ListModelMixin):
     """
     A ViewSet for Pets CR API.
@@ -22,6 +27,7 @@ class PetViewSet(viewsets.GenericViewSet,mixins.ListModelMixin):
         pet = Pet.objects.get(pk=kwargs['pk'])
         serializer = PetSerializer(pet)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class OrderViewSet(viewsets.GenericViewSet,mixins.ListModelMixin):
     """

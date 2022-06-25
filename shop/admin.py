@@ -1,5 +1,5 @@
 from django.contrib import admin
-from shop.models import PetType, Pet, PetBreed, Order, Customer,Parent,Child
+from shop.models import PetType, Pet, PetBreed, Order, Customer,Parent
 
 
 @admin.register(PetType)
@@ -27,10 +27,6 @@ class Order(admin.ModelAdmin):
 class Parent(admin.ModelAdmin):
     pass
 
-
-# @admin.register(Child)
-# class Child(admin.ModelAdmin):
-#     pass
 
 
 

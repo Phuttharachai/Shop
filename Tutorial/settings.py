@@ -27,7 +27,12 @@ SECRET_KEY = 'django-insecure-!9*%xbs27^k*4wgae7f8=wf5z3+pz!q&rju!3v%1zi0ov7p2n1
 DEBUG = True
 
 ALLOWED_HOSTS = []
-REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
+REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+                   'DEFAULT_AUTHENTICATION_CLASSES': [
+                        'rest_framework.authentication.BasicAuthentication',
+                        'rest_framework.authentication.SessionAuthentication',
+                        ]
+                   }
 
 # Application definition
 
