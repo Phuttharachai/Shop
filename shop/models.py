@@ -28,17 +28,11 @@ class Parent(models.Model):
         return self.name
 
 
-class Child(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return self.name
-
-
 class Customer(models.Model):
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=14)
     address = models.CharField(max_length=100)
+
 
 class Order(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
@@ -59,7 +53,7 @@ class Pet(models.Model):
     """
     order = models.ForeignKey(Order,null=True,related_name='shop', on_delete=models.SET_NULL,blank=True)
     parent = models.ForeignKey(Parent, on_delete=models.SET_NULL, null=True, blank=True)
-   # customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
 
 
     def __str__(self):

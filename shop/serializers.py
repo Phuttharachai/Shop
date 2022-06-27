@@ -1,6 +1,6 @@
+from django.contrib.auth import authenticate
 from shop.models import Pet, PetType, PetBreed, Order, Customer,Parent
 from rest_framework import serializers, validators
-from django.contrib.auth.models import User
 from rest_framework import authentication
 from rest_framework import exceptions
 
@@ -63,10 +63,7 @@ class PetSerializer(serializers.ModelSerializer):
         required=False,
         queryset=Parent.objects.all())
 
-    # customer = serializers.PrimaryKeyRelatedField(
-    #     allow_null=True,
-    #     required=False,
-    #     queryset=Customer.objects.all())
+
 
     son = serializers.SerializerMethodField()
 
@@ -82,17 +79,18 @@ class PetSerializer(serializers.ModelSerializer):
         son_serializer = PetSerializer(son)
         return son_serializer.data
 
-
-class Authentication(authentication.BaseAuthentication):
-    def authenticate(self, request):
-        username = request.get('username')
-        if not username:
-            return None
-
-        try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            raise exceptions.AuthenticationFailed('No such user')
-
-        return (user, None)
+    # def authenticate(self):
+    #     order = Pet.objects.get('order')
+    #     customer = Order.objects.get('customer')
+    #     if order and customer:
+    #         owner = authenticate(request=self.context.get('request'),
+    #                             order=order, customer=customer)
+    #         if not owner:
+    #             msg = 'Access denied: wrong  order or customer.'
+    #             raise serializers.ValidationError(msg, code='authorization')
+    #     else:
+    #         msg = 'Both "order" and "customer" are required.'
+    #         raise serializers.ValidationError(msg, code='authorization')
+    #
+    #     return owner
 
