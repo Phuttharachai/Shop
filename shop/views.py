@@ -3,9 +3,6 @@ from shop.models import Pet, Order ,Customer
 from shop.serializers import PetSerializer, OrderSerializer ,CustomerSerializer
 from rest_framework.response import Response
 
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from django.contrib.auth import authenticate
-from rest_framework import exceptions
 
 class PetViewSet(viewsets.GenericViewSet,mixins.ListModelMixin):
     """
@@ -16,49 +13,23 @@ class PetViewSet(viewsets.GenericViewSet,mixins.ListModelMixin):
     serializer_class = PetSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request, *args, **pet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    # def retrieve(self, request, *args, **kwargs):
+    def retrieve(self, *args, **customer_id:int):
+        pet = Pet.objects.filter(order__customer_id=customer_id)
+        serializer = PetSerializer(pet)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # def list(self, request, *args, **kwargs):
     #     pet = Pet.objects.get(pk=kwargs['pk'])
     #     serializer = PetSerializer(pet)
     #     return Response(serializer.data, status=status.HTTP_200_OK)
 
-    # def get(self, request, format=None):
-    #     authentication_classes = [SessionAuthentication, BasicAuthentication]
-    #     content = {
-    #         'user': str(request.user),  # `django.contrib.auth.User` instance.
-    #         'auth': str(request.auth),  # None
-    #     }
-    #     return Response(content)
 
-    # def retrieve(self,requst, *args, **kwargs):
-    #     a = Customer.name
-    #     b = Order.objects.get('customer')
-    #     if a==b:
-    #       pet = Pet.objects.get(pk=kwargs['pk'])
-    #       serializer = PetSerializer(pet)
-    #       return Response(serializer.data, status=status.HTTP_200_OK)
-    #     else:
-    #         raise 'You are not the owner'
-
-    def retrieve(self,requst, *args, **kwargs):
-        authentication_classes = [SessionAuthentication, BasicAuthentication]
-        order = Pet.order
-        customer = Customer.name
-        if order and customer:
-            owner = authenticate(order=order, customer=customer)
-            if owner:
-                pet = Pet.objects.get(pk=kwargs['pk'])
-                serializer = PetSerializer(pet)
-                raise Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            msg = 'You are not the owner'
-            raise serializers.ValidationError(msg, code='authorization')
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class OrderViewSet(viewsets.GenericViewSet,mixins.ListModelMixin):

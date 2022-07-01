@@ -65,12 +65,13 @@ class PetSerializer(serializers.ModelSerializer):
 
 
 
-    son = serializers.SerializerMethodField()
+
 
     class Meta:
         model = Pet
         fields = ['id', 'name', 'birthdate', 'type', 'breed','parent', 'order','son']
 
+    son = serializers.SerializerMethodField()
     def get_son(self, pet):
         try:
             son = Pet.objects.get(parent_id=pet.id)
@@ -78,19 +79,4 @@ class PetSerializer(serializers.ModelSerializer):
             return 'pet not found'
         son_serializer = PetSerializer(son)
         return son_serializer.data
-
-    # def authenticate(self):
-    #     order = Pet.objects.get('order')
-    #     customer = Order.objects.get('customer')
-    #     if order and customer:
-    #         owner = authenticate(request=self.context.get('request'),
-    #                             order=order, customer=customer)
-    #         if not owner:
-    #             msg = 'Access denied: wrong  order or customer.'
-    #             raise serializers.ValidationError(msg, code='authorization')
-    #     else:
-    #         msg = 'Both "order" and "customer" are required.'
-    #         raise serializers.ValidationError(msg, code='authorization')
-    #
-    #     return owner
 
