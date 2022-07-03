@@ -37,31 +37,31 @@ class OrderSerializer(serializers.ModelSerializer):
 class PetSerializer(serializers.ModelSerializer):
     # to send pet type name instead of id in the requests
 
-    type = serializers.SlugRelatedField(
-        slug_field='name',
-        error_messages={
-            'does_not_exist': 'Pet type does not exist.',
-        },
-        queryset=PetType.objects.all())
-
-    # to send pet breed name instead of id in the requests
-    breed = serializers.SlugRelatedField(
-        slug_field='name',
-        error_messages={
-            'does_not_exist': 'Pet breed does not exist.',
-        },
-        queryset=PetBreed.objects.all())
-
-    order = serializers.PrimaryKeyRelatedField(
-        allow_null=True,
-        required=False,
-        queryset=Order.objects.all())
-
-    parent = serializers.SlugRelatedField(
-        allow_null=True,
-        slug_field='name',
-        required=False,
-        queryset=Parent.objects.all())
+    # type = serializers.SlugRelatedField(
+    #     slug_field='name',
+    #     error_messages={
+    #         'does_not_exist': 'Pet type does not exist.',
+    #     },
+    #     queryset=PetType.objects.all())
+    #
+    # # to send pet breed name instead of id in the requests
+    # breed = serializers.SlugRelatedField(
+    #     slug_field='name',
+    #     error_messages={
+    #         'does_not_exist': 'Pet breed does not exist.',
+    #     },
+    #     queryset=PetBreed.objects.all())
+    #
+    # order = serializers.PrimaryKeyRelatedField(
+    #     allow_null=True,
+    #     required=False,
+    #     queryset=Order.objects.all())
+    #
+    # parent = serializers.SlugRelatedField(
+    #     allow_null=True,
+    #     slug_field='name',
+    #     required=False,
+    #     queryset=Parent.objects.all())
 
 
 
@@ -69,14 +69,15 @@ class PetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Pet
-        fields = ['id', 'name', 'birthdate', 'type', 'breed','parent', 'order','son']
-
-    son = serializers.SerializerMethodField()
-    def get_son(self, pet):
-        try:
-            son = Pet.objects.get(parent_id=pet.id)
-        except Pet.DoesNotExist:
-            return 'pet not found'
-        son_serializer = PetSerializer(son)
-        return son_serializer.data
+        fields = '__all__'
+    #     fields = ['id', 'name', 'birthdate', 'type', 'breed','parent', 'order','son']
+    #
+    # son = serializers.SerializerMethodField()
+    # def get_son(self, pet):
+    #     try:
+    #         son = Pet.objects.get(parent_id=pet.id)
+    #     except Pet.DoesNotExist:
+    #         return 'pet not found'
+    #     son_serializer = PetSerializer(son)
+    #     return son_serializer.data
 

@@ -53,7 +53,6 @@ class Pet(models.Model):
     """
     order = models.ForeignKey(Order,null=True,related_name='shop', on_delete=models.SET_NULL,blank=True)
     parent = models.ForeignKey(Parent, on_delete=models.SET_NULL, null=True, blank=True)
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
 
 
     def __str__(self):

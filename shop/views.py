@@ -19,17 +19,12 @@ class PetViewSet(viewsets.GenericViewSet,mixins.ListModelMixin):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def retrieve(self, *args, **customer_id:int):
-        pet = Pet.objects.filter(order__customer_id=customer_id)
-        serializer = PetSerializer(pet)
+    def retrieve(self,request, *args, **kwarg):
+        print(args)
+        print(kwarg)
+        pet = Pet.objects.filter(order__customer_id=kwarg['pk'])
+        serializer = PetSerializer(pet, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-    # def list(self, request, *args, **kwargs):
-    #     pet = Pet.objects.get(pk=kwargs['pk'])
-    #     serializer = PetSerializer(pet)
-    #     return Response(serializer.data, status=status.HTTP_200_OK)
-
-
 
 
 class OrderViewSet(viewsets.GenericViewSet,mixins.ListModelMixin):

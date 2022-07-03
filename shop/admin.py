@@ -13,6 +13,7 @@ class PetBreedAdmin(admin.ModelAdmin):
 
 @admin.register(Pet)
 class PetAdmin(admin.ModelAdmin):
+    list_display = ('id','name')
     pass
 
 @admin.register(Customer)

@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'shop.apps.ShopConfig',
+    'shop',
     'rest_framework_swagger',
 
 
